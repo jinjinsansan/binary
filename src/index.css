@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --panel-bg: rgba(30, 3, 7, 0.6);
+}
+
+body {
+  @apply text-white;
+}
+
+.card-glossy {
+  @apply bg-[var(--panel-bg)] rounded-xl shadow-glossy border border-red-900/30 backdrop-blur;
+  background-image: theme('backgroundImage.glossy');
+}
+
+.btn { @apply px-5 py-3 rounded-lg font-semibold shadow-md active:scale-[.98] transition; }
+.btn-up {
+  @apply text-white bg-blue-600 hover:bg-blue-500 shadow-glossy border border-blue-400/30;
+}
+.btn-down {
+  @apply text-white bg-[color:var(--casino-red,#c1121f)] hover:bg-casino-red shadow-glossy border border-red-400/30;
+}
+.btn-metallic:active {
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.5), inset 0 -6px 10px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.35);
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(0,0,0,0.1));
+}
+.glow-win-blue { box-shadow: 0 0 12px 4px rgba(96,165,250,0.7), 0 0 30px rgba(96,165,250,0.35); }
+.glow-win-red { box-shadow: 0 0 12px 4px rgba(239,68,68,0.7), 0 0 30px rgba(239,68,68,0.35); }
+.dim-lose { filter: brightness(0.6) saturate(0.8); }
+.chip { @apply px-3 py-1 rounded-full border border-yellow-300/30 bg-yellow-500/20 text-yellow-200 cursor-pointer; }
+.chip.active { @apply bg-yellow-400 text-black; }
+
+.scrollbar-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 9999px; }
+
+/* Chart reflection subtle overlay */
+.chart-reflection {
+  background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03) 35%, rgba(0,0,0,0) 40%);
+  pointer-events: none;
+}
