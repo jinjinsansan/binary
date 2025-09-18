@@ -23,7 +23,7 @@ export default function TableFelt() {
   ].join(' '), [phase, result])
 
   return (
-    <div className="relative w-full card-glossy overflow-hidden" style={{ height: 260 }}>
+    <div className="relative w-full card-glossy overflow-hidden" style={{ height: 300 }}>
       {/* felt background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-30%,rgba(255,255,255,0.18),rgba(255,255,255,0)_55%),radial-gradient(circle_at_50%_130%,rgba(0,0,0,0.6),rgba(0,0,0,0)_45%)]" />
       <div className="absolute inset-0 border-2 border-yellow-500/40 rounded-xl pointer-events-none" />
@@ -45,7 +45,11 @@ export default function TableFelt() {
 
       {/* tie note */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-green-300/80 select-none">TIE=REFUND</div>
+
+      {/* place bottom strip on felt */}
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-3">
+        <div id="felt-strip-placeholder" />
+      </div>
     </div>
   )
 }
-

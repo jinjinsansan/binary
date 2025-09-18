@@ -10,6 +10,7 @@ import { useStore } from '@/state/store'
 import { nextRandomWalk } from '@/utils/randomWalk'
 import { playLock, playLose, playTie, playWin } from '@/utils/sound'
 import TableFelt from '@/components/TableFelt'
+import BettingStrip from '@/components/BettingStrip'
 
 export default function App() {
   const round = useStore(s => s.round)
@@ -36,18 +37,16 @@ export default function App() {
     return () => clearInterval(id)
   }, [tick])
 
-  // Price animation during betting/pricing
+  // Price animation (always running for dealer area)
   useEffect(() => {
     const run = (ts: number) => {
       const fpsInterval = 1000 / 12
       let prev = (run as any)._prev || ts
       if (ts - prev >= fpsInterval) {
         (run as any)._prev = ts
-        if (round.phase === 'betting' || round.phase === 'pricing') {
-          const last = round.series[round.series.length - 1] ?? round.price
-          const next = nextRandomWalk(last, settings.vol)
-          appendPrice(next)
-        }
+        const last = round.series[round.series.length - 1] ?? round.price
+        const next = nextRandomWalk(last, settings.vol)
+        appendPrice(next)
         // no-op
       }
       animationRef.current = requestAnimationFrame(run)
@@ -141,7 +140,12 @@ export default function App() {
       <PriceChartCanvas />
 
       {/* Z3 Felt Table + Controls */}
-      <TableFelt />
+      <div className="relative">
+        <TableFelt />
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
+          <BettingStrip />
+        </div>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <BetPanel />
         <CrowdMeterDonut />

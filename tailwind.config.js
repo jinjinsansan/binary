@@ -14,6 +14,10 @@ export default {
           blue: '#1f6feb',
           gold: '#d4af37',
           green: '#21c55d'
+        },
+        brand: {
+          bgFrom: '#0b1220',
+          bgTo: '#1a2235'
         }
       },
       boxShadow: {
@@ -26,4 +30,3 @@ export default {
   },
   plugins: [],
 }
-

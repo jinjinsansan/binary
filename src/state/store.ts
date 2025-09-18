@@ -104,7 +104,10 @@ export const useStore = create<Store>((set, get) => ({
     return { crowd: { ...s.crowd, [key]: s.crowd[key] + 1 } as Crowd }
   }),
 
-  appendPrice: (p: number) => set((s) => ({ round: { ...s.round, price: p, series: [...s.round.series, p] } })),
+  appendPrice: (p: number) => set((s) => {
+    const series = s.round.series.length > 300 ? s.round.series.slice(-300) : s.round.series
+    return { round: { ...s.round, price: p, series: [...series, p] } }
+  }),
 
   startBetting: () => set((s) => ({ round: { ...s.round, phase: 'betting', secondsRemaining: ROUND_SECONDS, startPrice: s.round.price, series: [s.round.price] }, bets: { up: 0, down: 0 }, crowd: { upCount: 0, downCount: 0 } })),
 
