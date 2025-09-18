@@ -9,6 +9,7 @@ import SettingsPanel from '@/components/SettingsPanel'
 import { useStore } from '@/state/store'
 import { nextRandomWalk } from '@/utils/randomWalk'
 import { playLock, playLose, playTie, playWin } from '@/utils/sound'
+import TableFelt from '@/components/TableFelt'
 
 export default function App() {
   const round = useStore(s => s.round)
@@ -139,9 +140,10 @@ export default function App() {
       {/* Z2 Dealer Area - Chart */}
       <PriceChartCanvas />
 
-      {/* Z3 Betting Panel + Crowd */}
+      {/* Z3 Felt Table + Controls */}
+      <TableFelt />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <div className="md:col-span-2"><BetPanel /></div>
+        <BetPanel />
         <CrowdMeterDonut />
       </div>
 

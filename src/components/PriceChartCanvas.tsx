@@ -30,6 +30,20 @@ export default function PriceChartCanvas({ height = 220 }: Props) {
     const mapY = (p: number) => pad + h - ((p - min) / range) * h
     const mapX = (i: number) => pad + (i / Math.max(1, series.length - 1)) * w
 
+    // grid
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)'
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    for (let i = 1; i <= 4; i++) {
+      const gy = pad + (i/5) * h
+      ctx.moveTo(pad, gy); ctx.lineTo(pad + w, gy)
+    }
+    for (let i = 1; i <= 9; i++) {
+      const gx = pad + (i/10) * w
+      ctx.moveTo(gx, pad); ctx.lineTo(gx, pad + h)
+    }
+    ctx.stroke()
+
     // baseline at start price
     ctx.strokeStyle = 'rgba(255,255,255,0.2)'
     ctx.setLineDash([4, 4])
@@ -83,10 +97,16 @@ export default function PriceChartCanvas({ height = 220 }: Props) {
     ctx.fillStyle = gradTop
     ctx.fillRect(pad, pad, w, h * 0.35)
     ctx.restore()
+
+    // labels (min/max)
+    ctx.fillStyle = 'rgba(255,255,255,0.6)'
+    ctx.font = '10px sans-serif'
+    ctx.fillText(String(max), pad + 4, pad + 10)
+    ctx.fillText(String(min), pad + 4, pad + h - 2)
   }, [series, startPrice, closePrice])
 
   return (
-    <div className="card-glossy w-full relative" style={{ height }}>
+    <div className="card-glossy w-full relative" style={{ height: Math.max(240, height) }}>
       <canvas ref={canvasRef} className="w-full h-full rounded-xl" />
       <div className="absolute inset-0 rounded-xl chart-reflection" />
     </div>

@@ -40,3 +40,26 @@ body {
   background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.03) 35%, rgba(0,0,0,0) 40%);
   pointer-events: none;
 }
+
+/* Baccarat felt zones */
+.felt-zone {
+  position: absolute;
+  top: 58px;
+  width: 44%;
+  height: 170px;
+  border: 2px solid rgba(212,175,55,0.55);
+  border-radius: 9999px 9999px 80px 80px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; user-select: none;
+  transition: transform .05s ease, filter .2s ease, box-shadow .2s ease;
+}
+.felt-zone:hover { box-shadow: 0 6px 18px rgba(0,0,0,.35) inset; }
+.felt-up { left: 3%; background: radial-gradient(circle at 50% 30%, rgba(59,130,246,0.18), rgba(59,130,246,0.08)); }
+.felt-down { right: 3%; background: radial-gradient(circle at 50% 30%, rgba(239,68,68,0.18), rgba(239,68,68,0.08)); }
+.felt-zone:active { transform: translateY(1px); }
+.felt-win { box-shadow: 0 0 18px 6px rgba(212,175,55,0.55), 0 0 36px rgba(212,175,55,0.25); }
+.felt-lose { filter: brightness(.7) saturate(.8); }
+.felt-zone .zone-label { font-size: 28px; letter-spacing: .2em; font-weight: 800; }
+.felt-up .zone-label { color: #93c5fd; }
+.felt-down .zone-label { color: #fca5a5; }
+.felt-zone .zone-amt { margin-top: 6px; font-size: 12px; color: rgba(255,255,255,.7); }

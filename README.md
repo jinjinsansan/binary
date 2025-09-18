@@ -24,6 +24,22 @@ VITE_BOT_BIAS=0.2
 3. ブラウザで表示
    - ターミナルに表示される `http://localhost:5173` などのURLへアクセス
 
+## Vercel へのデプロイ
+1. GitHub 連携
+   - このリポジトリ（`jinjinsansan/binary`）を Vercel の Import Project から選択
+2. Framework Preset: Vite（自動検出）
+3. Build & Output
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+4. 環境変数（任意）
+   - `VITE_ROUND_SECONDS=12`
+   - `VITE_INTERMISSION_SECONDS=3`
+   - `VITE_PAYOUT=1.95`
+   - `VITE_BOT_BIAS=0.2`
+   - 未設定でもデフォルト値で動作します（Vite がビルド時に埋め込みます）
+5. ルーティング
+   - `vercel.json` を同梱（`/(.*)` を `index.html` にリライトするSPA設定）
+
 ## 画面ゾーン
 - Z1 ヘッダ：テーブル名、ゲーム番号、円形カウントダウン
 - Z2 ディーラー領域：BTC/USD ラインチャート（擬似ランダムウォーク、終値で点をマーキング）
