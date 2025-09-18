@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import PriceChartCanvas from '@/components/PriceChartCanvas'
-import BetPanel from '@/components/BetPanel'
 import CrowdMeterDonut from '@/components/CrowdMeterDonut'
 import Roads from '@/components/Roads'
 import BalanceBar from '@/components/BalanceBar'
@@ -147,7 +146,7 @@ export default function App() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        <BetPanel />
+        <div className="md:col-span-2"></div>
         <CrowdMeterDonut />
       </div>
 

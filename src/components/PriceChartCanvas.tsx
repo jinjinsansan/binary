@@ -53,7 +53,7 @@ export default function PriceChartCanvas({ height = 220 }: Props) {
     ctx.stroke()
     ctx.setLineDash([])
 
-    // gradient line
+    // gradient line + area
     const grad = ctx.createLinearGradient(pad, pad, pad + w, pad + h)
     grad.addColorStop(0, '#7dd3fc')
     grad.addColorStop(1, '#93c5fd')
@@ -67,6 +67,15 @@ export default function PriceChartCanvas({ height = 220 }: Props) {
       else ctx.lineTo(x, y)
     })
     ctx.stroke()
+    // area fill
+    const areaGrad = ctx.createLinearGradient(0, pad, 0, pad + h)
+    areaGrad.addColorStop(0, 'rgba(125,211,252,0.25)')
+    areaGrad.addColorStop(1, 'rgba(125,211,252,0.02)')
+    ctx.lineTo(pad + w, pad + h)
+    ctx.lineTo(pad, pad + h)
+    ctx.closePath()
+    ctx.fillStyle = areaGrad
+    ctx.fill()
 
     // close marker with subtle pulse + reflection
     const marker = closePrice ?? series[series.length - 1]
@@ -106,7 +115,8 @@ export default function PriceChartCanvas({ height = 220 }: Props) {
   }, [series, startPrice, closePrice])
 
   return (
-    <div className="card-glossy w-full relative" style={{ height: Math.max(240, height) }}>
+    <div className="card-glossy w-full relative" style={{ height: Math.max(280, height) }}>
+      <div className="absolute top-2 left-3 text-xs text-white/70">BTC/USD Chart</div>
       <canvas ref={canvasRef} className="w-full h-full rounded-xl" />
       <div className="absolute inset-0 rounded-xl chart-reflection" />
     </div>

@@ -7,6 +7,8 @@ export default function BettingStrip() {
   const { upCount, downCount } = useStore(s => s.crowd)
   const { up, down } = useStore(s => s.bets)
   const placeBet = useStore(s => s.placeBet)
+  const chip = useStore(s => s.selectedChip)
+  const setChip = useStore(s => s.setChip)
   const settings = useStore(s => s.settings)
 
   const total = upCount + downCount
@@ -15,12 +17,22 @@ export default function BettingStrip() {
   const canBet = phase === 'betting'
 
   return (
-    <div className="flex items-stretch justify-center gap-2">
-      <Panel color="blue" title="UP" pct={upPct} amount={up} disabled={!canBet}
-        onClick={() => { if (!canBet) return; placeBet('up'); if (settings.sounds) playBet(settings.volume) }} />
-      <Panel color="green" title="TIE" pct={0} amount={0} disabled={true} onClick={() => {}} />
-      <Panel color="red" title="DOWN" pct={downPct} amount={down} disabled={!canBet}
-        onClick={() => { if (!canBet) return; placeBet('down'); if (settings.sounds) playBet(settings.volume) }} />
+    <div className="flex flex-col items-center gap-2">
+      <div className="flex items-stretch justify-center gap-2">
+        <Panel color="blue" title="UP" pct={upPct} amount={up} disabled={!canBet}
+          onClick={() => { if (!canBet) return; placeBet('up'); if (settings.sounds) playBet(settings.volume) }} />
+        <Panel color="green" title="TIE" pct={0} amount={0} disabled={true} onClick={() => {}} />
+        <Panel color="red" title="DOWN" pct={downPct} amount={down} disabled={!canBet}
+          onClick={() => { if (!canBet) return; placeBet('down'); if (settings.sounds) playBet(settings.volume) }} />
+      </div>
+      <div className="flex items-center gap-2 justify-center">
+        {[1,5,10,50,100].map(v => (
+          <button key={v} onClick={() => setChip(v)}
+            className={`chip ${chip===v?'active':''}`}>
+            {v}
+          </button>
+        ))}
+      </div>
     </div>
   )
 }
@@ -36,4 +48,3 @@ function Panel({ color, title, pct, amount, onClick, disabled }: { color: 'blue'
     </button>
   )
 }
-
